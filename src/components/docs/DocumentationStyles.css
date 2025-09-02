@@ -1,0 +1,715 @@
+/* Documentation Page Styles */
+
+/* Document structure */
+.doc-header {
+  @apply mb-8;
+}
+
+.doc-title {
+  @apply text-3xl font-bold text-white mb-4;
+}
+
+.doc-subtitle {
+  @apply text-lg text-gray-300 leading-relaxed;
+}
+
+.section-title {
+  @apply text-2xl font-bold text-white mb-6;
+}
+
+/* Images */
+.doc-image-container {
+  @apply mb-8 rounded-lg overflow-hidden border border-gray-600;
+}
+
+.doc-image {
+  @apply w-full h-auto rounded-lg shadow-lg;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+/* Content styling */
+.prose-docs {
+  @apply text-gray-300 leading-relaxed;
+}
+
+.prose-docs h3 {
+  @apply text-xl font-semibold text-white mt-8 mb-4;
+}
+
+.prose-docs h4 {
+  @apply text-lg font-medium text-white mt-6 mb-3;
+}
+
+.prose-docs p {
+  @apply mb-4 text-gray-300 leading-relaxed;
+}
+
+.prose-docs ul, .prose-docs ol {
+  @apply mb-6 space-y-2;
+}
+
+.prose-docs ul {
+  @apply list-disc list-inside;
+}
+
+.prose-docs ol {
+  @apply list-decimal list-inside;
+}
+
+.prose-docs li {
+  @apply text-gray-300;
+}
+
+.prose-docs li ul, .prose-docs li ol {
+  @apply mt-2 ml-6 space-y-1;
+}
+
+.prose-docs strong {
+  @apply text-white font-semibold;
+}
+
+/* Callout boxes */
+.info-callout, .tip-callout, .warning-callout, .danger-callout {
+  @apply rounded-lg p-6 mb-8 border flex items-start space-x-4;
+}
+
+.info-callout {
+  @apply bg-blue-600/10 border-blue-500/30;
+}
+
+.tip-callout {
+  @apply bg-yellow-600/10 border-yellow-500/30;
+}
+
+.warning-callout {
+  @apply bg-orange-600/10 border-orange-500/30;
+}
+
+.danger-callout {
+  @apply bg-red-600/10 border-red-500/30;
+}
+
+.callout-icon {
+  @apply w-6 h-6 flex-shrink-0 mt-1;
+}
+
+.callout-content h3 {
+  @apply text-lg font-semibold mb-3 mt-0;
+}
+
+.callout-content p {
+  @apply text-gray-300 leading-relaxed;
+}
+
+.callout-content ul {
+  @apply mt-3 space-y-1;
+}
+
+/* Document sections */
+.doc-section {
+  @apply mb-12;
+}
+
+/* Steps and processes */
+.steps-container, .setup-steps, .creation-steps, .connection-steps, .deletion-process {
+  @apply space-y-8;
+}
+
+.step-item, .setup-step, .creation-step, .connection-step, .deletion-step {
+  @apply flex items-start space-x-6 p-6 bg-gray-800/30 rounded-lg border border-gray-700;
+}
+
+.step-number {
+  @apply w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0;
+}
+
+.step-number.danger {
+  @apply bg-red-600;
+}
+
+.step-number.success {
+  @apply bg-green-600;
+}
+
+.step-content h3 {
+  @apply text-lg font-semibold text-white mb-3 mt-0;
+}
+
+.step-content p {
+  @apply text-gray-300 mb-4;
+}
+
+.step-details, .step-note, .step-locations, .step-visual {
+  @apply mt-4 p-3 bg-gray-700/50 rounded-lg;
+}
+
+/* Form guides */
+.form-guide {
+  @apply space-y-8;
+}
+
+.form-field-detailed {
+  @apply bg-gray-800/30 rounded-lg p-6 border border-gray-700;
+}
+
+.field-header {
+  @apply flex items-center justify-between mb-4;
+}
+
+.field-header h3 {
+  @apply text-lg font-semibold text-white m-0;
+}
+
+.required-badge {
+  @apply px-2 py-1 bg-red-600/20 text-red-400 text-xs rounded border border-red-500/30;
+}
+
+.auto-filled-badge {
+  @apply px-2 py-1 bg-blue-600/20 text-blue-400 text-xs rounded border border-blue-500/30;
+}
+
+.field-description {
+  @apply text-gray-300 mb-4 leading-relaxed;
+}
+
+.field-examples, .field-format, .field-options, .field-tips {
+  @apply mt-4;
+}
+
+.field-examples h4, .field-format h4, .field-options h4, .field-tips strong {
+  @apply text-white font-medium mb-2 block;
+}
+
+/* Examples and grids */
+.examples-grid, .format-examples, .impact-grid, .requirements-grid, .use-cases-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 mt-3;
+}
+
+.example-item, .format-item, .impact-item, .requirement-item, .use-case-card {
+  @apply p-3 bg-gray-700/50 rounded border border-gray-600;
+}
+
+.example-category {
+  @apply space-y-2;
+}
+
+.example-category strong {
+  @apply text-green-400 block mb-2;
+}
+
+.example-category ul {
+  @apply space-y-1 ml-4;
+}
+
+.example-box {
+  @apply mt-2 p-2 bg-green-600/10 border border-green-500/30 rounded text-sm;
+}
+
+/* Business type cards */
+.business-types-detailed {
+  @apply space-y-6 mt-6;
+}
+
+.business-type-card {
+  @apply bg-gray-800/50 border border-gray-600 rounded-lg p-6;
+}
+
+.business-type-card.service-type {
+  @apply border-blue-500/30 bg-blue-600/5;
+}
+
+.business-type-card.retail-type {
+  @apply border-green-500/30 bg-green-600/5;
+}
+
+.type-header {
+  @apply flex items-center justify-between mb-4;
+}
+
+.type-header h4 {
+  @apply text-lg font-semibold text-white m-0;
+}
+
+.type-badge {
+  @apply px-3 py-1 rounded text-xs font-medium;
+}
+
+.type-badge.service {
+  @apply bg-blue-600/20 text-blue-400 border border-blue-500/30;
+}
+
+.type-badge.retail {
+  @apply bg-green-600/20 text-green-400 border border-green-500/30;
+}
+
+.type-description {
+  @apply text-gray-300 mb-4;
+}
+
+.type-details {
+  @apply space-y-4;
+}
+
+.detail-section {
+  @apply space-y-2;
+}
+
+.detail-section strong {
+  @apply text-white block mb-2;
+}
+
+.detail-section ul {
+  @apply space-y-1 text-sm text-gray-400;
+}
+
+/* Question examples */
+.question-examples {
+  @apply space-y-2 mt-2;
+}
+
+.question-item {
+  @apply text-sm text-gray-400 bg-gray-700/30 p-2 rounded;
+}
+
+/* Requirements checklist */
+.requirements-checklist {
+  @apply space-y-6;
+}
+
+.requirement-item.critical .requirement-status {
+  @apply text-green-400;
+}
+
+.requirement-item.important .requirement-status {
+  @apply text-blue-400;
+}
+
+.requirement-item.recommended .requirement-status {
+  @apply text-yellow-400;
+}
+
+.requirement-content h3 {
+  @apply text-lg font-semibold text-white mb-3 mt-0;
+}
+
+.requirement-description {
+  @apply text-gray-300 mb-4;
+}
+
+.requirement-details h4 {
+  @apply text-white font-medium mb-2 mt-4;
+}
+
+.requirement-details ol, .requirement-details ul {
+  @apply space-y-1 text-gray-400;
+}
+
+.requirement-verification, .requirement-note {
+  @apply mt-4 p-3 bg-gray-700/50 rounded;
+}
+
+.requirement-verification strong, .requirement-note strong {
+  @apply text-white;
+}
+
+/* Connection status */
+.status-indicators {
+  @apply space-y-4;
+}
+
+.status-item {
+  @apply flex items-start space-x-4 p-4 bg-gray-800/30 rounded-lg;
+}
+
+.status-dot {
+  @apply w-4 h-4 rounded-full flex-shrink-0 mt-1;
+}
+
+.status-dot.green {
+  @apply bg-green-400;
+}
+
+.status-dot.yellow {
+  @apply bg-yellow-400;
+}
+
+.status-dot.red {
+  @apply bg-red-400;
+}
+
+.status-dot.gray {
+  @apply bg-gray-400;
+}
+
+.status-content h3 {
+  @apply text-lg font-semibold text-white mb-2 mt-0;
+}
+
+.status-content p {
+  @apply text-gray-300 mb-2;
+}
+
+.status-actions {
+  @apply text-sm text-gray-400;
+}
+
+/* Timelines */
+.timeline-container {
+  @apply space-y-6;
+}
+
+.timeline-item {
+  @apply flex items-start space-x-4;
+}
+
+.timeline-dot {
+  @apply w-3 h-3 bg-green-400 rounded-full flex-shrink-0 mt-2;
+}
+
+.timeline-content h3 {
+  @apply text-lg font-semibold text-white mb-2 mt-0;
+}
+
+.timeline-content p {
+  @apply text-gray-300 mb-3;
+}
+
+.demo-features-list {
+  @apply space-y-1 text-sm text-gray-400 ml-4;
+}
+
+/* Architecture diagrams */
+.architecture-diagram {
+  @apply bg-gray-800/30 rounded-lg p-6 border border-gray-700;
+}
+
+.structure-visual {
+  @apply space-y-4;
+}
+
+.org-level, .business-level {
+  @apply flex justify-center items-center space-x-4;
+}
+
+.org-box, .business-box {
+  @apply bg-green-600/10 border border-green-500/30 rounded-lg p-4 text-center;
+}
+
+.org-box strong, .business-box strong {
+  @apply block text-white font-semibold mb-1;
+}
+
+.org-box span, .business-box span {
+  @apply text-gray-300 text-sm;
+}
+
+.instagram-connection {
+  @apply text-green-400 text-xs mt-2 font-mono;
+}
+
+/* Benefits and features */
+.architecture-benefits, .benefits-list, .next-steps-section {
+  @apply mt-8;
+}
+
+.benefits-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
+
+.benefit-item {
+  @apply p-4 bg-gray-800/30 rounded-lg border border-gray-700;
+}
+
+.benefit-item strong {
+  @apply text-white block mb-2;
+}
+
+.benefit-item p {
+  @apply text-gray-300 text-sm;
+}
+
+/* Next steps */
+.next-steps-flow {
+  @apply space-y-6;
+}
+
+.next-step-item {
+  @apply flex items-start space-x-4 p-4 bg-gray-800/30 rounded-lg border border-gray-700;
+}
+
+.step-icon {
+  @apply w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0;
+}
+
+.step-link {
+  @apply inline-flex items-center space-x-1 text-green-400 hover:text-green-300 text-sm mt-2;
+}
+
+/* Deletion specific styles */
+.deletion-items {
+  @apply space-y-6;
+}
+
+.deletion-category {
+  @apply bg-gray-800/30 rounded-lg p-6 border border-gray-700;
+}
+
+.deletion-category h3 {
+  @apply text-lg font-semibold text-white mb-4 mt-0;
+}
+
+.deletion-category ul {
+  @apply space-y-2 text-gray-300;
+}
+
+.pre-deletion-checklist {
+  @apply space-y-6;
+}
+
+.consideration-item {
+  @apply flex items-start space-x-4 p-6 bg-gray-800/30 rounded-lg border border-gray-700;
+}
+
+.consideration-item.critical {
+  @apply border-red-500/30 bg-red-600/5;
+}
+
+.consideration-item.important {
+  @apply border-blue-500/30 bg-blue-600/5;
+}
+
+.consideration-item.moderate {
+  @apply border-yellow-500/30 bg-yellow-600/5;
+}
+
+.export-options, .export-process, .notification-checklist {
+  @apply mt-4;
+}
+
+.export-options h4, .export-process strong, .notification-checklist h4 {
+  @apply text-white font-medium mb-2 block;
+}
+
+/* Confirmation modals */
+.confirmation-example {
+  @apply mt-4;
+}
+
+.confirmation-modal {
+  @apply bg-gray-700 border border-gray-600 rounded-lg p-4;
+}
+
+.confirmation-modal h4 {
+  @apply text-red-400 font-semibold mb-3 mt-0;
+}
+
+.confirmation-input {
+  @apply mt-3;
+}
+
+.confirmation-input label {
+  @apply block text-sm text-gray-300 mb-2;
+}
+
+.confirmation-input input {
+  @apply w-full p-2 bg-gray-800 border border-gray-600 rounded text-white;
+}
+
+/* Checklists */
+.checklist-item {
+  @apply flex items-center space-x-2 text-sm text-gray-300;
+}
+
+.checklist-item input {
+  @apply mr-2;
+}
+
+/* Troubleshooting */
+.troubleshooting-guide {
+  @apply space-y-6;
+}
+
+.issue-category {
+  @apply bg-gray-800/30 rounded-lg p-6 border border-gray-700;
+}
+
+.issue-category h3 {
+  @apply text-lg font-semibold text-white mb-4 mt-0;
+}
+
+.issue-item {
+  @apply mb-4;
+}
+
+.issue-item h4 {
+  @apply text-white font-medium mb-2;
+}
+
+.issue-solution {
+  @apply text-sm text-gray-400 bg-gray-700/50 p-3 rounded;
+}
+
+/* FAQ */
+.faq-container {
+  @apply space-y-4;
+}
+
+.faq-item {
+  @apply bg-gray-800/30 rounded-lg p-4 border border-gray-700;
+}
+
+.faq-item h3 {
+  @apply text-white font-semibold mb-2 mt-0;
+}
+
+.faq-item p {
+  @apply text-gray-300 text-sm;
+}
+
+/* Alternatives */
+.alternatives-section {
+  @apply mt-12;
+}
+
+.alternatives-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.alternative-option {
+  @apply bg-gray-800/30 rounded-lg p-6 border border-gray-700;
+}
+
+.alternative-option h3 {
+  @apply text-lg font-semibold text-white mb-3 mt-0;
+}
+
+.alternative-option p {
+  @apply text-gray-300 mb-4 text-sm;
+}
+
+.option-benefits {
+  @apply space-y-2;
+}
+
+.option-benefits strong {
+  @apply text-white block mb-2;
+}
+
+.option-benefits ul {
+  @apply space-y-1 text-sm text-gray-400;
+}
+
+/* Overview page styles */
+.doc-overview-card {
+  @apply bg-gray-800/50 rounded-lg p-6 border border-gray-700 hover:border-green-500/50 transition-all duration-200;
+}
+
+.card-icon {
+  @apply mb-4;
+}
+
+.card-title {
+  @apply text-lg font-semibold text-white mb-3;
+}
+
+.card-description {
+  @apply text-gray-300 text-sm mb-4;
+}
+
+.card-links {
+  @apply space-y-2;
+}
+
+.card-link {
+  @apply inline-flex items-center space-x-1 text-green-400 hover:text-green-300 text-sm;
+}
+
+.popular-pages {
+  @apply mt-12;
+}
+
+.popular-links {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-3;
+}
+
+.popular-link {
+  @apply flex items-center space-x-2 p-3 bg-gray-800/30 rounded-lg border border-gray-700 hover:border-green-500/50 text-white hover:text-green-400 transition-all duration-200;
+}
+
+.help-section {
+  @apply mt-12;
+}
+
+.help-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.help-item {
+  @apply bg-gray-800/30 rounded-lg p-4 border border-gray-700;
+}
+
+.help-item h3 {
+  @apply text-white font-semibold mb-2 mt-0;
+}
+
+.help-item p {
+  @apply text-gray-400 text-sm;
+}
+
+/* Post deletion info */
+.post-deletion-info {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.immediate-effects, .billing-impact, .recovery-options {
+  @apply bg-gray-800/30 rounded-lg p-4 border border-gray-700;
+}
+
+.immediate-effects h3, .billing-impact h3, .recovery-options h3 {
+  @apply text-white font-semibold mb-3 mt-0;
+}
+
+.no-recovery {
+  @apply flex items-center space-x-2 text-red-400 text-sm mt-2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .doc-image {
+    max-height: 300px;
+  }
+  
+  .examples-grid,
+  .format-examples,
+  .impact-grid,
+  .requirements-grid,
+  .use-cases-grid,
+  .benefits-grid {
+    @apply grid-cols-1;
+  }
+  
+  .step-item,
+  .setup-step,
+  .creation-step,
+  .connection-step,
+  .deletion-step {
+    @apply flex-col space-x-0 space-y-4;
+  }
+  
+  .consideration-item {
+    @apply flex-col space-x-0 space-y-4;
+  }
+
+  .popular-links {
+    @apply grid-cols-1;
+  }
+
+  .help-grid {
+    @apply grid-cols-1;
+  }
+
+  .post-deletion-info {
+    @apply grid-cols-1;
+  }
+}

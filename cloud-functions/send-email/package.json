@@ -1,0 +1,14 @@
+{
+  "name": "fead-email-function",
+  "version": "1.0.0",
+  "description": "Google Cloud Function for sending emails from fead.app",
+  "main": "index.js",
+  "engines": {
+    "node": "18"
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0",
+    "googleapis": "^126.0.1",
+    "nodemailer": "^6.9.7"
+  }
+}

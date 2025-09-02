@@ -1,68 +1,660 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* shadcn/ui CSS Variables - Clean Implementation */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 174 100% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 174 100% 42%;
+    --radius: 0.5rem;
+    
+    /* Brand color variations */
+    --brand-primary: 174 100% 42%;
+    --brand-primary-hover: 174 100% 38%;
+    --brand-primary-foreground: 0 0% 100%;
+  }
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  html.dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 174 100% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 174 100% 42%;
+    
+    /* Brand color variations for dark mode */
+    --brand-primary: 174 100% 42%;
+    --brand-primary-hover: 174 100% 46%;
+    --brand-primary-foreground: 0 0% 100%;
+  }
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Base styling for shadcn/ui compatibility */
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Fix cursor issues - prevent text cursor on non-interactive elements */
+h1, h2, h3, h4, h5, h6, p, span, div, section, article, header, footer, nav, aside, main {
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* Allow text selection and cursor for interactive/content elements */
+input, textarea, [contenteditable="true"], [role="textbox"] {
+  cursor: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Allow text selection for readable content */
+.content-text, .prose, .documentation-content, .legal-content, 
+.selectable, .text-selectable, pre, code, [data-selectable="true"] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+  cursor: text;
+}
+
+/* Button and interactive elements should have pointer cursor */
+button, a, [role="button"], [role="link"] {
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Theme-Adaptive Glassmorphism Utilities */
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-border/50;
+    transition: all 0.2s ease-in-out;
   }
-  a:hover {
-    color: #747bff;
+  
+  .glass-card:hover {
+    @apply bg-card/90 backdrop-blur-lg;
   }
-  button {
-    background-color: #f9f9f9;
+  
+  .glass-nav {
+    @apply bg-background/80 backdrop-blur-md border-b border-border/50;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .glass-modal {
+    @apply bg-card/95 backdrop-blur-lg border border-border shadow-2xl;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .glass-overlay {
+    @apply bg-black/40 dark:bg-black/60 backdrop-blur-sm;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .glass-mobile-menu {
+    @apply bg-card/95 backdrop-blur-lg border border-border shadow-xl;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .glass-input {
+    @apply bg-card/60 backdrop-blur-sm border border-input;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .glass-input:focus {
+    @apply bg-card/80 backdrop-blur-md;
+  }
+  
+  /* Enhanced glassmorphism for light theme */
+  .light .glass-card {
+    @apply bg-card/70 shadow-lg shadow-black/5;
+  }
+  
+  .light .glass-nav {
+    @apply bg-background/70 shadow-sm shadow-black/5;
+  }
+  
+  .light .glass-modal {
+    @apply bg-card/90 shadow-2xl shadow-black/10;
+  }
+  
+  .light .glass-mobile-menu {
+    @apply bg-card/90 shadow-xl shadow-black/10;
+  }
+  
+  .light .glass-input {
+    @apply bg-card/40;
+  }
+  
+  .light .glass-input:focus {
+    @apply bg-card/70;
+  }
+}
+
+/* Responsive Typography Utilities */
+@layer utilities {
+  .text-responsive-sm {
+    font-size: clamp(0.875rem, 0.8125rem + 0.3125vw, 1rem);
+  }
+  
+  .text-responsive-base {
+    font-size: clamp(1rem, 0.9375rem + 0.3125vw, 1.125rem);
+  }
+  
+  .text-responsive-lg {
+    font-size: clamp(1.125rem, 1.0625rem + 0.3125vw, 1.25rem);
+  }
+  
+  .text-responsive-xl {
+    font-size: clamp(1.25rem, 1.125rem + 0.625vw, 1.5rem);
+  }
+  
+  .text-responsive-2xl {
+    font-size: clamp(1.5rem, 1.375rem + 0.625vw, 1.875rem);
+  }
+  
+  .text-responsive-3xl {
+    font-size: clamp(1.875rem, 1.6875rem + 0.9375vw, 2.25rem);
+  }
+  
+  .text-responsive-4xl {
+    font-size: clamp(2.25rem, 2rem + 1.25vw, 3rem);
+  }
+
+  /* Mobile-optimized spacing */
+  .space-y-responsive > * + * {
+    margin-top: clamp(1rem, 0.875rem + 0.625vw, 1.5rem);
+  }
+  
+  .gap-responsive {
+    gap: clamp(1rem, 0.875rem + 0.625vw, 1.5rem);
+  }
+  
+  /* Touch-friendly utilities */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+  
+  .touch-padding {
+    padding: clamp(0.75rem, 0.625rem + 0.625vw, 1rem);
+  }
+
+  /* Enhanced touch feedback */
+  .touch-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .touch-ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .touch-ripple:active::before {
+    width: 120%;
+    height: 120%;
+    opacity: 0.1;
+  }
+
+  /* Smooth mobile scrolling */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Prevent text selection on touch */
+  .touch-select-none {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Button touch optimizations */
+  .button-mobile-touch {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+  }
+
+  /* Enhanced focus indicators for mobile */
+  @media (max-width: 768px) {
+    .button-focus-mobile {
+      @apply focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-4;
+    }
+  }
+
+  /* Hover state optimizations for touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    .button-hover-desktop:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Enhanced hover states for desktop only */
+    .hover-lift:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(var(--primary), 0.3);
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  /* Touch device optimizations - no hover states */
+  @media (hover: none) and (pointer: coarse) {
+    /* Remove all hover states on touch devices */
+    .button-hover-desktop:hover,
+    .hover-lift:hover,
+    .hover-glow:hover,
+    .hover-scale:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    
+    /* Use focus states instead for keyboard navigation */
+    .button-hover-desktop:focus-visible,
+    .hover-lift:focus-visible {
+      outline: 2px solid rgba(var(--primary), 0.8);
+      outline-offset: 2px;
+    }
+  }
+
+  /* Hybrid device support (can hover and touch) */
+  @media (hover: hover) and (pointer: coarse) {
+    /* Reduce hover effects for hybrid devices */
+    .button-hover-desktop:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* Loading and Skeleton Animations */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes wave {
+    0%, 100% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Skeleton Animation Classes */
+  .animate-shimmer {
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .animate-wave {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animate-wave::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: wave 1.6s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  /* Loading state utilities */
+  .loading-enter {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .loading-exit {
+    animation: fadeIn 0.2s ease-out reverse;
+  }
+
+  /* Staggered animations for lists */
+  .stagger-animation > * {
+    animation: slideIn 0.4s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-shimmer,
+    .animate-wave,
+    .animate-pulse,
+    .animate-fade-in,
+    .animate-slide-in,
+    .animate-scale-in,
+    .stagger-animation > * {
+      animation: none;
+    }
+    
+    /* Provide alternative visual feedback for reduced motion */
+    .animate-shimmer,
+    .animate-wave {
+      opacity: 0.6;
+    }
+  }
+
+  /* Touch-specific button spacing and sizing */
+  .button-spacing-mobile {
+    margin: 0.25rem 0;
+  }
+
+  @media (max-width: 640px) {
+    .button-spacing-mobile {
+      margin: 0.5rem 0;
+    }
+    
+    /* Ensure adequate spacing between button groups on mobile */
+    .button-group-mobile > * + * {
+      margin-top: 0.75rem;
+    }
+    
+    /* Full-width buttons on mobile when appropriate */
+    .button-mobile-full {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* Mobile menu animations */
+  .mobile-menu-enter {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  .mobile-menu-enter-active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 200ms ease-out;
+  }
+
+  .mobile-menu-exit {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .mobile-menu-exit-active {
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.6, 1), opacity 200ms ease-in;
+  }
+
+  /* Mobile overlay animations */
+  .overlay-enter {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+
+  .overlay-enter-active {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+    transition: opacity 200ms ease-out, backdrop-filter 300ms ease-out;
+  }
+
+  .overlay-exit {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+
+  .overlay-exit-active {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    transition: opacity 150ms ease-in, backdrop-filter 200ms ease-in;
+  }
+
+  /* Staggered animations for menu items */
+  .mobile-nav-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInStagger 0.3s ease-out forwards;
+  }
+
+  .mobile-nav-item:nth-child(1) { animation-delay: 0.05s; }
+  .mobile-nav-item:nth-child(2) { animation-delay: 0.1s; }
+  .mobile-nav-item:nth-child(3) { animation-delay: 0.15s; }
+  .mobile-nav-item:nth-child(4) { animation-delay: 0.2s; }
+  .mobile-nav-item:nth-child(5) { animation-delay: 0.25s; }
+
+  @keyframes slideInStagger {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Enhanced hamburger icon transitions */
+  .hamburger-icon {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hamburger-icon.open {
+    transform: rotate(180deg);
+  }
+
+  /* Mobile form optimizations */
+  .form-field-mobile {
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+
+  .form-spacing-mobile {
+    gap: clamp(1rem, 1rem + 0.5vw, 1.25rem);
+  }
+
+  /* Enhanced input focus states for mobile */
+  .input-focus-mobile:focus {
+    transform: scale(1.02);
+    transition: all 0.2s ease-out;
+  }
+
+  /* Virtual keyboard adjustments */
+  @media screen and (max-height: 500px) {
+    .modal-mobile-keyboard {
+      max-height: 90vh;
+      overflow-y: auto;
+      position: fixed;
+      top: 5vh;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  /* Enhanced modal spacing for mobile */
+  @media screen and (max-width: 640px) {
+    .modal-mobile-keyboard {
+      margin: 1rem;
+      max-width: calc(100vw - 2rem);
+      width: calc(100vw - 2rem);
+    }
+  }
+
+  /* Prevent zoom on input focus (iOS) */
+  @media screen and (max-width: 768px) {
+    input[type="text"], 
+    input[type="email"], 
+    input[type="password"], 
+    input[type="tel"], 
+    input[type="url"], 
+    input[type="number"],
+    select, 
+    textarea {
+      font-size: 16px !important;
+      transform: scale(1);
+    }
+  }
+
+  /* Modal backdrop blur optimization */
+  .modal-backdrop-mobile {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Form button stack on mobile */
+  @media screen and (max-width: 640px) {
+    .form-button-group {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .form-button-group button {
+      width: 100%;
+      order: 1;
+    }
+    
+    .form-button-group button[type="submit"] {
+      order: 0;
+    }
+  }
+
+  /* Mobile form button enhancements */
+  .form-button-mobile {
+    min-height: 48px;
+    font-size: 1rem;
+    font-weight: 500;
+    touch-action: manipulation;
+  }
+
+  /* Select dropdown optimizations for mobile */
+  .select-mobile {
+    min-height: 48px;
+  }
+
+  .select-mobile .select-item {
+    min-height: 44px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    touch-action: manipulation;
   }
 }
