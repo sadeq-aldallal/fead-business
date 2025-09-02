@@ -1,0 +1,36 @@
+{
+  "version": "48.0.0",
+  "files": {
+    "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6": {
+      "displayName": "FeadBusinessDevStack/Custom::S3AutoDeleteObjectsCustomResourceProvider Code",
+      "source": {
+        "path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "742054800137-eu-west-1-31ecd5f9": {
+          "bucketName": "cdk-hnb659fds-assets-742054800137-eu-west-1",
+          "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::742054800137:role/cdk-hnb659fds-file-publishing-role-742054800137-eu-west-1"
+        }
+      }
+    },
+    "e7ea569ac11a06556b22d1477fca6a5efa02e10473646344fe52b289f4dfea3f": {
+      "displayName": "FeadBusinessDevStack Template",
+      "source": {
+        "path": "FeadBusinessDevStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "742054800137-eu-west-1-394d11a7": {
+          "bucketName": "cdk-hnb659fds-assets-742054800137-eu-west-1",
+          "objectKey": "e7ea569ac11a06556b22d1477fca6a5efa02e10473646344fe52b289f4dfea3f.json",
+          "region": "eu-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::742054800137:role/cdk-hnb659fds-file-publishing-role-742054800137-eu-west-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

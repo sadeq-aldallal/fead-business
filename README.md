@@ -1,6 +1,6 @@
-# fead.app - Complete Supabase Authentication System
+# fead.app Business Dashboard - Complete Supabase Authentication System
 
-A modern React application with comprehensive Supabase authentication, featuring a dark futuristic design and multilingual support.
+A modern React business dashboard application with comprehensive Supabase authentication, featuring a dark futuristic design and multilingual support.
 
 ## 🚀 Features
 
@@ -34,7 +34,7 @@ A modern React application with comprehensive Supabase authentication, featuring
 ### 1. Clone and Install Dependencies
 ```bash
 git clone <repository-url>
-cd fead-app
+cd fead-business
 npm install
 ```
 

@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   
   return {
     plugins: [react()],
+    base: '/business/',  // Set base path for /business/*
     optimizeDeps: {
       exclude: ['lucide-react'],
     },

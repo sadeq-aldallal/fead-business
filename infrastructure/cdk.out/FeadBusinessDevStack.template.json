@@ -1,0 +1,305 @@
+{
+ "Resources": {
+  "FeadBusinessBucketF4B94B37": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "dev-fead.app-business",
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     }
+    ],
+    "WebsiteConfiguration": {
+     "ErrorDocument": "index.html",
+     "IndexDocument": "index.html"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "FeadBusinessDevStack/FeadBusinessBucket/Resource"
+   }
+  },
+  "FeadBusinessBucketPolicy12C61163": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "FeadBusinessBucketF4B94B37"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "FeadBusinessBucketF4B94B37",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "FeadBusinessBucketF4B94B37",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "s3:GetObject",
+       "Condition": {
+        "StringEquals": {
+         "AWS:SourceArn": "arn:aws:cloudfront::742054800137:distribution/E3FT5O6TL4MEXM"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "FeadBusinessBucketF4B94B37",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FeadBusinessDevStack/FeadBusinessBucket/Policy/Resource"
+   }
+  },
+  "FeadBusinessBucketAutoDeleteObjectsCustomResourceB9386BCB": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "FeadBusinessBucketF4B94B37"
+    }
+   },
+   "DependsOn": [
+    "FeadBusinessBucketPolicy12C61163"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "FeadBusinessDevStack/FeadBusinessBucket/AutoDeleteObjectsCustomResource/Default"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FeadBusinessDevStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-742054800137-eu-west-1",
+     "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Lambda function for auto-deleting objects in ",
+       {
+        "Ref": "FeadBusinessBucketF4B94B37"
+       },
+       " S3 bucket."
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FeadBusinessDevStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+    "aws:asset:property": "Code"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12PzW6DMBCEnyV7jIwb6KXilp8eemkQOUZVZZtNZDA48q6hEcq7VwWlanOa1X4zq9lMZmkqVws1UGKqJnFWy/HAyjRCDfRJz3LcRNMgH0fQ0/CuWoQcliBgQE2W8a2r8GvnTWyx4//oNQQfHtAlamdNiapaG4NEkJ+UIxSgnTdNMdE7mQIBW98rV3hnzRVyqJA4+CsIUJH9Dh0y7nWNhglyDhFvH2J76ubeYpY5/PvEdPmvbeY3sY3Evi2RfAwGj7CEyXRfPPAi+N5WGDaKUKyJkA+szrY7/2T2kS+Rb6LzFcqanvosk+mLXC1qsjYJsWPboixn/QZEjunNiAEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "FeadBusinessDevStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "BusinessBucketName": {
+   "Description": "Business S3 Bucket Name",
+   "Value": {
+    "Ref": "FeadBusinessBucketF4B94B37"
+   },
+   "Export": {
+    "Name": "dev-fead-business-bucket"
+   }
+  },
+  "BusinessBucketArn": {
+   "Description": "Business S3 Bucket ARN",
+   "Value": {
+    "Fn::GetAtt": [
+     "FeadBusinessBucketF4B94B37",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "dev-fead-business-bucket-arn"
+   }
+  },
+  "BusinessBucketDomainName": {
+   "Description": "Business S3 Bucket Domain Name",
+   "Value": {
+    "Fn::GetAtt": [
+     "FeadBusinessBucketF4B94B37",
+     "DomainName"
+    ]
+   },
+   "Export": {
+    "Name": "dev-fead-business-bucket-domain"
+   }
+  },
+  "ExistingDistributionId": {
+   "Description": "Existing CloudFront Distribution ID to update",
+   "Value": "E3FT5O6TL4MEXM",
+   "Export": {
+    "Name": "dev-fead-existing-distribution-id"
+   }
+  },
+  "BusinessUrl": {
+   "Description": "Business App URL (after CloudFront update)",
+   "Value": "https://dev.fead.app/business",
+   "Export": {
+    "Name": "dev-fead-business-url"
+   }
+  },
+  "NextSteps": {
+   "Description": "Manual steps required to complete setup",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "1. Update CloudFront distribution E3FT5O6TL4MEXM to add business origin and /business/* behavior. 2. Deploy business app to s3://",
+      {
+       "Ref": "FeadBusinessBucketF4B94B37"
+      },
+      ". 3. Invalidate /business/* paths."
+     ]
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
